@@ -1,0 +1,16 @@
+{
+  "name": "blue-social-app",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "format": "prettier --write \"./**/*.{js,html}\"",
+    "dev": "parcel index.html"
+  },
+  "repository": "git@github.com:nuseehr/blue-social-app.git",
+  "devDependencies": {
+    "eslint": "^6.1.0",
+    "eslint-config-prettier": "^6.0.0",
+    "prettier": "^1.18.2"
+  }
+}
