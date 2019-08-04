@@ -4,11 +4,30 @@ import Home from "./components/Home";
 export default class App extends Component {
   state = { posts: [] };
 
+  AddPost = contents => {
+    this.setState({
+      posts: [
+        {
+          seq: this.state.posts.length,
+          writer: "Boykin",
+          contents: contents,
+          createAt: new Date(),
+          likes: 0,
+          comments: 0,
+          likesOfMe: false,
+          commentList: []
+        },
+        ...this.state.posts
+      ]
+    });
+  };
+
   render() {
+    console.log("THIS STATE ", this.state);
     return (
       <div>
         <Header />
-        <Home posts={this.state.posts} />
+        <Home posts={this.state.posts} onPostCommit={this.AddPost} />
         <style jsx global>{`
           * {
             box-sizing: border-box;
