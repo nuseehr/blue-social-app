@@ -2,13 +2,13 @@ import React, { Component } from "react";
 import Header from "./components/Header";
 import Home from "./components/Home";
 export default class App extends Component {
-  static = { posts: [] };
+  state = { posts: [] };
 
   render() {
     return (
       <div>
         <Header />
-        <Home />
+        <Home posts={this.state.posts} />
         <style jsx global>{`
           * {
             box-sizing: border-box;
