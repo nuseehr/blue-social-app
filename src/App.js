@@ -29,12 +29,26 @@ export default class App extends Component {
     });
   };
 
+  LikePost = postSeq => {
+    const posts = this.state.posts.splice(0);
+    const idx = posts.findIndex(v => v.seq === postSeq);
+    const post = posts[idx];
+
+    if (post.likesOfMe === false) post.likes += 1;
+    post.likesOfMe = true;
+    this.setState({ posts });
+  };
+
   render() {
     console.log("THIS STATE ", this.state);
     return (
       <div>
         <Header />
-        <Home posts={this.state.posts} onPostCommit={this.AddPost} />
+        <Home
+          posts={this.state.posts}
+          onPostCommit={this.AddPost}
+          onLikeClicked={this.LikePost}
+        />
         <style jsx global>{`
           * {
             box-sizing: border-box;
