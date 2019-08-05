@@ -4,14 +4,13 @@ const PostForm = props => {
   const { onPostCommit } = props;
   const [contents, setContents] = useState("");
 
-  console.log(onPostCommit);
   return (
     <form
       className="write-form"
       onSubmit={e => {
         e.preventDefault();
         onPostCommit(contents);
-        setContents("COMMIT!!!!");
+        setContents("");
       }}
     >
       <textarea

@@ -2,14 +2,21 @@ import React, { Component } from "react";
 import Header from "./components/Header";
 import Home from "./components/Home";
 export default class App extends Component {
-  state = { posts: [] };
+  state = {
+    user: {
+      name: "Boykin",
+      profileImageUrl:
+        "https://s3.ap-northeast-2.amazonaws.com/grepp-cloudfront/programmers_imgs/learn/course9872/instructor_harry.png"
+    },
+    posts: []
+  };
 
   AddPost = contents => {
     this.setState({
       posts: [
         {
           seq: this.state.posts.length,
-          writer: "Boykin",
+          writer: this.state.user,
           contents: contents,
           createAt: new Date(),
           likes: 0,
