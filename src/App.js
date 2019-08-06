@@ -11,7 +11,7 @@ export default class App extends Component {
     posts: []
   };
 
-  AddPost = contents => {
+  addPost = contents => {
     this.setState({
       posts: [
         {
@@ -29,7 +29,7 @@ export default class App extends Component {
     });
   };
 
-  LikePost = postSeq => {
+  likePost = postSeq => {
     const posts = this.state.posts.splice(0);
     const idx = posts.findIndex(v => v.seq === postSeq);
     const post = posts[idx];
@@ -39,15 +39,32 @@ export default class App extends Component {
     this.setState({ posts });
   };
 
+  addComment = (postSeq, contents) => {
+    const posts = this.state.posts.splice(0);
+    const idx = posts.findIndex(v => v.seq === postSeq);
+    const post = posts[idx];
+
+    post.commentList = [
+      {
+        seq: post.commentList.length,
+        createAt: new Date(),
+        writer: this.state.user,
+        contents
+      },
+      ...post.commentList
+    ];
+    this.setState({ posts });
+  };
+
   render() {
-    console.log("THIS STATE ", this.state);
     return (
       <div>
         <Header />
         <Home
           posts={this.state.posts}
-          onPostCommit={this.AddPost}
-          onLikeClicked={this.LikePost}
+          onPostCommit={this.addPost}
+          onLikeClicked={this.likePost}
+          onCommentSubmit={this.addComment}
         />
         <style jsx global>{`
           * {

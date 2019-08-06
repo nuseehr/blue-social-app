@@ -2,8 +2,10 @@ import React from "react";
 import locale from "date-fns/locale/ko";
 import classnames from "classnames";
 import distanceInWords from "date-fns/distance_in_words_to_now";
+import CommentList from "./CommentList";
+import CommentForm from "./CommentForm";
 
-const Post = ({ post, onLikeClicked }) => {
+const Post = ({ post, onLikeClicked, onCommentSubmit }) => {
   console.log("POST RENDER", post);
   const {
     seq,
@@ -12,7 +14,8 @@ const Post = ({ post, onLikeClicked }) => {
     contents,
     comments,
     likes,
-    likesOfMe
+    likesOfMe,
+    commentList
   } = post;
 
   const datetime = distanceInWords(createAt, {
@@ -46,25 +49,8 @@ const Post = ({ post, onLikeClicked }) => {
           </span>
         </div>
       </div>
-      <ul className="comment-list">
-        <li className="comment">
-          <div className="comment-info">
-            <h6 className="comment-writer">Aiden</h6>
-            <div className="comment-datetime">10분전</div>
-          </div>
-          <p className="comment-text">그래요 배워야죠 배워야 남는거죠...</p>
-        </li>
-      </ul>
-      <form className="comment-form">
-        <textarea
-          className="form-control input-lg"
-          placeholder="댓글을 입력하세요..."
-          spellCheck="false"
-        ></textarea>
-        <button type="submit" className="btn btn-primary">
-          댓글달기
-        </button>
-      </form>
+      <CommentList commentList={commentList} />
+      <CommentForm postseq={seq} onCommentSubmit={onCommentSubmit} />
     </div>
   );
 };
