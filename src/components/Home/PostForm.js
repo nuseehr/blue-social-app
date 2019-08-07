@@ -1,8 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 
 const PostForm = props => {
-  const { onPostCommit, placeholder = "무슨 생각을 하고 계신가요?" } = props;
+  const {
+    minHeight = 100,
+    lineHeight = 20,
+    placeholder = "무슨 생각을 하고 계신가요?",
+    onPostCommit = () => {}
+  } = props;
   const [contents, setContents] = useState("");
+  const textareaEl = useRef(null);
+
+  useEffect(() => {
+    textareaEl.current.style.height = "auto";
+    textareaEl.current.style.height =
+      textareaEl.current.scrollHeight + lineHeight + "px";
+  }, [contents]);
 
   return (
     <form
@@ -16,6 +28,7 @@ const PostForm = props => {
       <textarea
         className="form-control input-lg"
         placeholder={placeholder}
+        ref={textareaEl}
         spellCheck="false"
         value={contents}
         onChange={e => setContents(e.target.value)}
@@ -25,8 +38,8 @@ const PostForm = props => {
       </button>
       <style jsx global>{`
         .write-form > textarea.form-control {
-          min-height: 100px;
-          line-height: 20px;
+          min-height: ${minHeight}px;
+          line-height: ${lineHeight}px;
           padding: 20px;
           font-size: 18px;
           resize: none;

@@ -1,8 +1,21 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 
-const CommentForm = ({ postseq, onCommentSubmit }) => {
+const CommentForm = props => {
+  const {
+    postseq,
+    minHeight = 20,
+    lineHeight = 20,
+    placeholder = "댓글을 입력하세요...",
+    onCommentSubmit = () => {}
+  } = props;
   const [contents, setContents] = useState("");
+  const textareaEl = useRef(null);
 
+  useEffect(() => {
+    textareaEl.current.style.height = "auto";
+    textareaEl.current.style.height =
+      textareaEl.current.scrollHeight + lineHeight + "px";
+  });
   return (
     <form
       className="comment-form"
@@ -14,9 +27,10 @@ const CommentForm = ({ postseq, onCommentSubmit }) => {
     >
       <textarea
         className="form-control input-lg"
-        placeholder="댓글을 입력하세요..."
+        placeholder={placeholder}
         spellCheck="false"
         value={contents}
+        ref={textareaEl}
         onChange={e => setContents(e.target.value)}
       ></textarea>
       <button type="submit" className="btn btn-primary">
@@ -27,8 +41,8 @@ const CommentForm = ({ postseq, onCommentSubmit }) => {
           margin: 20px;
         }
         .comment-form > textarea.form-control {
-          min-height: 20px;
-          line-height: 20px;
+          min-height: ${minHeight}px;
+          line-height: ${lineHeight}px;
           border-radius: 0.5rem;
           resize: none;
         }
