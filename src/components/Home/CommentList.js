@@ -9,6 +9,12 @@ const CommentList = props => {
       {commentList.map(comment => (
         <Comment key={comment.seq} comment={comment} />
       ))}
+      <style jsx global>{`
+        ul.comment-list {
+          padding: 0;
+          list-style: none;
+        }
+      `}</style>
     </ul>
   );
 };

@@ -22,6 +22,11 @@ const Home = ({
     <div className="posts container">
       <PostForm onPostCommit={onPostCommit} />
       {postList}
+      <style jsx>{`
+        .container {
+          max-width: 600px;
+        }
+      `}</style>
     </div>
   );
 };
