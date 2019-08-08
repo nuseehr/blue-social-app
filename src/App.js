@@ -56,10 +56,16 @@ export default class App extends Component {
     this.setState({ posts });
   };
 
+  logOut = () => {
+    this.setState({
+      user: undefined
+    });
+  };
+
   render() {
     return (
       <div>
-        <Header user={this.state.user} />
+        <Header user={this.state.user} onLogout={this.logOut} />
         <Home
           posts={this.state.posts}
           onPostCommit={this.addPost}

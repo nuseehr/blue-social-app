@@ -1,5 +1,5 @@
 import React from "react";
-
+import toggle from "../../hoc/toggle";
 const Profile = props => {
   const { name, profileImageUrl } = props.user;
   return (
@@ -11,4 +11,4 @@ const Profile = props => {
   );
 };
 
-export default Profile;
+export default toggle(Profile);
