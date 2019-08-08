@@ -59,7 +59,7 @@ export default class App extends Component {
   render() {
     return (
       <div>
-        <Header />
+        <Header user={this.state.user} />
         <Home
           posts={this.state.posts}
           onPostCommit={this.addPost}
